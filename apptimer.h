@@ -27,10 +27,11 @@ private:
     // big rest time after goalCount is reached - miliseconds
     int goalRestBig;
 
-    // variables in terms of
-
 public:
     explicit AppTimer(QObject *parent = nullptr);
+
+    // start the timer
+    void startTimer();
 
     // getter for the time elapsed
     int getTimeSeconds();
@@ -54,6 +55,9 @@ public:
     // setter and getter for goalRestSmall
     void setGoalRestBig(int time);
     int getGoalRestBig();
+
+    // pause the timer
+    void pause();
 
     // restart the timer
     void restart();

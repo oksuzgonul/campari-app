@@ -20,6 +20,10 @@ private slots:
 
     void on_startButton_clicked();
 
+    void on_pauseButton_clicked();
+
+    void on_restartButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     //QTimer * appTimer;

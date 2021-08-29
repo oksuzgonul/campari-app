@@ -35,5 +35,17 @@ void MainWindow::UpdateTime()
 
 void MainWindow::on_startButton_clicked()
 {
-    appTimer->start(1000);
+    appTimer->startTimer();
 }
+
+void MainWindow::on_pauseButton_clicked()
+{
+    appTimer->pause();
+}
+
+
+void MainWindow::on_restartButton_clicked()
+{
+    appTimer->restart();
+}
+

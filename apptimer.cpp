@@ -2,13 +2,19 @@
 
 AppTimer::AppTimer(QObject *parent) : QTimer(parent)
 {
-   elapsed.restart();
-   goalTime = 10000;
+   elapsed.invalidate();
+   goalTime = 10;
+}
+
+void AppTimer::startTimer()
+{
+    elapsed.start();
+    start(1000);
 }
 
 int AppTimer::getTimeSeconds()
 {
-    return elapsed.elapsed();
+    return elapsed.elapsed() / 1000;
 }
 
 void AppTimer::setGoalTime(int time)
@@ -59,6 +65,12 @@ void AppTimer::setGoalRestBig(int time)
 int AppTimer::getGoalRestBig()
 {
     return goalRestBig;
+}
+
+void AppTimer::pause()
+{
+    elapsed.invalidate();
+    stop();
 }
 
 void AppTimer::restart()
