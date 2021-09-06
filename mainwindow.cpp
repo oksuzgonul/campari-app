@@ -22,10 +22,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::UpdateTime()
 {
-    if (appTimer->getTimeSeconds() >= appTimer->getGoalTime()) {
-
-        ui->sessionLabel->setText("Study finished");
+    if (appTimer->isTimerComplete()) {
         appTimer->stop();
+        switch (appTimer->getMode()) {
+        case LONG_BREAK:
+            appTimer->SessionReset();
+        case SHORT_BREAK:
+            appTimer->setMode(MAIN_TIMER);
+        case MAIN_TIMER:
+            if (appTimer->isCountReached())
+            {
+                appTimer->setMode(LONG_BREAK);
+            } else
+            {
+                appTimer->setMode(SHORT_BREAK);
+                appTimer->incrementStudyCount();
+            }
+        }
+
+        appTimer->startTimer();
     }
     else
     {
@@ -35,5 +50,41 @@ void MainWindow::UpdateTime()
 
 void MainWindow::on_startButton_clicked()
 {
-    appTimer->start(1000);
+    appTimer->startTimer();
 }
+
+void MainWindow::on_pauseButton_clicked()
+{
+    appTimer->pause();
+}
+
+
+void MainWindow::on_restartButton_clicked()
+{
+    appTimer->restart();
+}
+
+
+void MainWindow::on_goalTimeSlider_valueChanged(int value)
+{
+    appTimer->setGoalTime(value);
+}
+
+
+void MainWindow::on_smallBreakSlider_valueChanged(int value)
+{
+    appTimer->setGoalRestSmall(value);
+}
+
+
+void MainWindow::on_sessionCountSlider_valueChanged(int value)
+{
+    appTimer->setGoalCount(value);
+}
+
+
+void MainWindow::on_bigBreakSlider_valueChanged(int value)
+{
+    appTimer->setGoalRestBig(value);
+}
+

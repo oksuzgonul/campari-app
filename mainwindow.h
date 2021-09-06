@@ -20,6 +20,18 @@ private slots:
 
     void on_startButton_clicked();
 
+    void on_pauseButton_clicked();
+
+    void on_restartButton_clicked();
+
+    void on_goalTimeSlider_valueChanged(int value);
+
+    void on_smallBreakSlider_valueChanged(int value);
+
+    void on_sessionCountSlider_valueChanged(int value);
+
+    void on_bigBreakSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     //QTimer * appTimer;
